@@ -24,19 +24,24 @@ document.addEventListener('DOMContentLoaded', () => {
     promise
       .then(delay => {
         iziToast.success({
+          //метод відображення повідомлення (від бібліотеки!!!)
           title: 'Success',
           message: `Fulfilled promise in ${delay}ms`,
-          position: 'topRight', //позиція відображення повідомлення
+          position: 'topRight', //позиція відображення повідомлення (від бібліотеки!!!)
         });
       })
       .catch(delay => {
         iziToast.error({
+          //метод відображення повідомлення (від бібліотеки!!!)
           title: 'Error',
           message: `Rejected promise in ${delay}ms`,
-          position: 'topRight', //позиція відображення повідомлення
+          position: 'topRight', //позиція відображення повідомлення (від бібліотеки!!!)
         });
-      });
+      })
 
-    form.reset();
+      //скид
+      .finally(() => {
+        form.reset();
+      });
   });
 });
