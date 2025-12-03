@@ -23,6 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     promise
       .then(delay => {
+        console.log(`Fulfilled promise in ${delay}ms`); //консолю
         iziToast.success({
           //метод відображення повідомлення (від бібліотеки!!!)
           title: 'Success',
@@ -31,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
       })
       .catch(delay => {
+        console.log(`Rejected promise in ${delay}ms`); //консолю
         iziToast.error({
           //метод відображення повідомлення (від бібліотеки!!!)
           title: 'Error',
