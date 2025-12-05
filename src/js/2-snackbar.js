@@ -26,7 +26,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`Fulfilled promise in ${delay}ms`); //консолю
         iziToast.success({
           //метод відображення повідомлення (від бібліотеки!!!)
-          title: 'Success',
+          icon: '',
+          title: '✅',
           message: `Fulfilled promise in ${delay}ms`,
           position: 'topRight', //позиція відображення повідомлення (від бібліотеки!!!)
         });
@@ -35,7 +36,8 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log(`Rejected promise in ${delay}ms`); //консолю
         iziToast.error({
           //метод відображення повідомлення (від бібліотеки!!!)
-          title: 'Error',
+          icon: '',
+          title: '❌',
           message: `Rejected promise in ${delay}ms`,
           position: 'topRight', //позиція відображення повідомлення (від бібліотеки!!!)
         });
