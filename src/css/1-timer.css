@@ -6,3 +6,15 @@
   margin-top: 100px;
   margin-bottom: 100px;
 }
+
+.timer {
+  display: flex;
+  gap: 15px;
+
+  margin-top: 20px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+}
