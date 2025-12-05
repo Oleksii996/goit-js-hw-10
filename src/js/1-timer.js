@@ -27,7 +27,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-  },
+  }, //Параметр selectedDates — це масив обраних дат, тому ми беремо перший елемент selectedDates[0].
 
   onClose(selectedDates) {
     const chosenDate = selectedDates[0];
@@ -43,7 +43,7 @@ const options = {
       });
 
       startBtn.disabled = true; //вимикаємо кнопку!!!
-      userSelectedDate = null; //скид каледнаря
+      userSelectedDate = null; //скид дати
       return;
     }
 
@@ -53,12 +53,10 @@ const options = {
   },
 };
 
-flatpickr(input, options); //Бібліотека очікує, що її ініціалізують на елементі input[type="text"], тому ми додали до HTML документа поле input#datetime-picker.
+flatpickr(input, options); //Бібліотека очікує, що її ініціалізують на елементі input[type="text"], тому ми додали до HTML документа поле input#datetime-picker.(умова)
 
 //#endregion
 
-// ---------------------------
-//       START BUTTON
 // ---------------------------
 startBtn.addEventListener('click', () => {
   if (!userSelectedDate) return;
@@ -96,9 +94,9 @@ startBtn.addEventListener('click', () => {
   }, 1000);
 });
 
-// ---------------------------
-//         TIME UTILS
-// ---------------------------
+//#endregion
+
+// #region Відлік часу
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -128,3 +126,4 @@ function updateTimer(ms) {
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
+//#endregion
