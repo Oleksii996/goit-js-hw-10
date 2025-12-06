@@ -9,3 +9,7 @@
 @import url('./base.css');
 @import url('./container.css');
 @import url('./animations.css');
+
+/* Task styles */
+@import url('./1-timer.css');
+@import url('./2-snackbar.css');
