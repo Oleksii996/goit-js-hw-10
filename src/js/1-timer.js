@@ -24,10 +24,8 @@ const options = {
   time_24hr: true,
   defaultDate: new Date(),
   minuteIncrement: 1,
-  onClose(selectedDates) {
-    console.log(selectedDates[0]);
-  }, //Параметр selectedDates — це масив обраних дат, тому ми беремо перший елемент selectedDates[0]. З ТЗ
 
+  //Параметр selectedDates — це масив обраних дат, тому ми беремо перший елемент selectedDates[0]. З ТЗ
   onClose(selectedDates) {
     const chosenDate = selectedDates[0];
 
