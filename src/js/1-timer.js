@@ -12,14 +12,13 @@ const daysEl = document.querySelector('[data-days]');
 const hoursEl = document.querySelector('[data-hours]');
 const minutesEl = document.querySelector('[data-minutes]');
 const secondsEl = document.querySelector('[data-seconds]');
+//#endregion
 
 let userSelectedDate = null; //скид каледнаря (на старті)
 let timerId = null; //Викикаємо кнопку на початку
-
 startBtn.disabled = true; //Вимикаємо кнопку на початку
-//#endregion
 
-//#region Alert-Повідомлення (iziToast)
+//#region Alert-Повідомлення (iziToast) + Вибір дати
 const options = {
   enableTime: true,
   time_24hr: true,
@@ -43,7 +42,7 @@ const options = {
       });
 
       startBtn.disabled = true; //вимикаємо кнопку!!!
-      userSelectedDate = null; //скид дати
+      userSelectedDate = null; //дата без змін!!!
       return;
     }
 
@@ -54,21 +53,14 @@ const options = {
 };
 
 flatpickr(input, options); //Бібліотека очікує, що її ініціалізують на елементі input[type="text"], тому ми додали до HTML документа поле input#datetime-picker.(умова)
-
 //#endregion
 
-// ---------------------------
+//#region Старт таймеру
 startBtn.addEventListener('click', () => {
-  if (!userSelectedDate) return;
+  if (!userSelectedDate) return; //обрана дата
 
   startBtn.disabled = true;
   input.disabled = true;
-
-  iziToast.info({
-    title: 'Started',
-    message: 'The countdown has begun.',
-    position: 'topRight',
-  });
 
   timerId = setInterval(() => {
     const now = new Date();
@@ -76,27 +68,18 @@ startBtn.addEventListener('click', () => {
 
     // Таймер завершився
     if (timeLeft <= 0) {
-      clearInterval(timerId);
-      updateTimer(0);
-
-      iziToast.success({
-        title: 'Done!',
-        message: 'Timer finished.',
-        position: 'topRight',
-      });
-
       input.disabled = false; // дозволяємо вибрати нову дату
       startBtn.disabled = true; // кнопка знову неактивна
       return;
     }
 
-    updateTimer(timeLeft);
+    updateTimer(timeLeft); // - now
   }, 1000);
 });
-
 //#endregion
 
 // #region Відлік часу
+
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -109,19 +92,17 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-}
+} //Для підрахунку значень використовуй готову функцію convertMs, де ms — різниця між кінцевою і поточною датою в мілісекундах.
 
 function updateTimer(ms) {
   const { days, hours, minutes, seconds } = convertMs(ms);
 
-  // Дні можуть бути 1, 2, 10, 200, 3000 → НЕ додаємо 0
   daysEl.textContent = days;
 
-  // Інші значення → формат xx
   hoursEl.textContent = addLeadingZero(hours);
   minutesEl.textContent = addLeadingZero(minutes);
   secondsEl.textContent = addLeadingZero(seconds);
-}
+} // В інтерфейсі таймера необхідно додавати 0, якщо в числі менше двох символів. Напиши функцію, наприклад addLeadingZero(value), яка використовує метод рядка padStart() і перед відмальовуванням інтерфейсу форматує значення.
 
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
