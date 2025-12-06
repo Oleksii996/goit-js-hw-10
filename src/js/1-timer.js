@@ -66,6 +66,7 @@ startBtn.addEventListener('click', () => {
 
     // Таймер завершився
     if (timeLeft <= 0) {
+      clearInterval(timerId); // помилка була, зупинити інтервал потрібно!!!
       input.disabled = false; // дозволяємо вибрати нову дату
       startBtn.disabled = true; // кнопка знову неактивна
       return;
@@ -77,6 +78,8 @@ startBtn.addEventListener('click', () => {
 //#endregion
 
 // #region Відлік часу
+
+//Для підрахунку значень використовуй готову функцію convertMs, де ms — різниця між кінцевою і поточною датою в мілісекундах.
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -90,12 +93,11 @@ function convertMs(ms) {
 
   return { days, hours, minutes, seconds };
 }
-//Для підрахунку значень використовуй готову функцію convertMs, де ms — різниця між кінцевою і поточною датою в мілісекундах.
 
 function updateTimer(ms) {
   const { days, hours, minutes, seconds } = convertMs(ms);
 
-  daysEl.textContent = days;
+  daysEl.textContent = addLeadingZero(days); // буде два 0, а не один!!!
 
   hoursEl.textContent = addLeadingZero(hours);
   minutesEl.textContent = addLeadingZero(minutes);
