@@ -15,8 +15,8 @@ const secondsEl = document.querySelector('[data-seconds]');
 //#endregion
 
 let userSelectedDate = null; //скид каледнаря (на старті)
-let timerId = null; //Викикаємо кнопку на початку
-startBtn.disabled = true; //Вимикаємо кнопку на початку
+let timerId = null; //Викикає кнопку на початку
+startBtn.disabled = true; //Вимикає кнопку на початку
 
 //#region Alert-Повідомлення (iziToast) + Вибір дати
 const options = {
@@ -26,7 +26,7 @@ const options = {
   minuteIncrement: 1,
   onClose(selectedDates) {
     console.log(selectedDates[0]);
-  }, //Параметр selectedDates — це масив обраних дат, тому ми беремо перший елемент selectedDates[0].
+  }, //Параметр selectedDates — це масив обраних дат, тому ми беремо перший елемент selectedDates[0]. З ТЗ
 
   onClose(selectedDates) {
     const chosenDate = selectedDates[0];
@@ -79,7 +79,6 @@ startBtn.addEventListener('click', () => {
 //#endregion
 
 // #region Відлік часу
-
 function convertMs(ms) {
   const second = 1000;
   const minute = second * 60;
@@ -92,7 +91,8 @@ function convertMs(ms) {
   const seconds = Math.floor((((ms % day) % hour) % minute) / second);
 
   return { days, hours, minutes, seconds };
-} //Для підрахунку значень використовуй готову функцію convertMs, де ms — різниця між кінцевою і поточною датою в мілісекундах.
+}
+//Для підрахунку значень використовуй готову функцію convertMs, де ms — різниця між кінцевою і поточною датою в мілісекундах.
 
 function updateTimer(ms) {
   const { days, hours, minutes, seconds } = convertMs(ms);
@@ -102,9 +102,10 @@ function updateTimer(ms) {
   hoursEl.textContent = addLeadingZero(hours);
   minutesEl.textContent = addLeadingZero(minutes);
   secondsEl.textContent = addLeadingZero(seconds);
-} // В інтерфейсі таймера необхідно додавати 0, якщо в числі менше двох символів. Напиши функцію, наприклад addLeadingZero(value), яка використовує метод рядка padStart() і перед відмальовуванням інтерфейсу форматує значення.
-
+}
 function addLeadingZero(value) {
   return String(value).padStart(2, '0');
 }
+// В інтерфейсі таймера необхідно додавати 0, якщо в числі менше двох символів. Напиши функцію, наприклад addLeadingZero(value), яка використовує метод рядка padStart() і перед відмальовуванням інтерфейсу форматує значення.
+
 //#endregion
